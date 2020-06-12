@@ -47,7 +47,7 @@ class Person {
     this.stomach = [];
   }
   eat(someFood) {
-    if (this.stomach.length <= 10) {
+    if (this.stomach.length < 10) {
       this.stomach.push(someFood)
         return this.stomach;
     } else if (this.stomach.length === 10) {
@@ -77,7 +77,24 @@ class Person {
 */
 
 class Car {
-
+  constructor(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill(gallons) {
+    this.tank += gallons;
+  }
+  drive(distance){
+    this.odometer += distance;
+    this.tank -= (distance / this.milesPerGallon);
+    if (this.tank < 1 ) {
+      this.odometer = this.tank * this.milesPerGallon;
+      this.tank = 0;
+      return (`I ran out of fuel at ${this.odometer} miles!`)
+    }
+  }
 }
 
 /*
@@ -92,8 +109,23 @@ class Car {
         + Speaking should return a phrase `Hello my name is {name}, I am from {location}`.
         + {name} and {location} of course come from the instance's own properties.
 */
-class Lambdasian {
+// const obj = {
+//   name: 'name',
+//   age: 'age',
+//   location: 'location'
+// }
 
+class Lambdasian {
+  constructor(obj) {
+    this.obj = {
+      name: obj.name,
+      age: obj.age,
+      location: obj.location
+    }
+  }
+  speak(name, age, location) {
+    return `Hello my name is ${name}, I am from ${location}`
+  }
 }
 
 /*
